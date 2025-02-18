@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define VERSION "ver 2.5.0";
+#define VERSION "ver 2.5.0"
 
 // Toggle switch that pause engraving. Sort of a safty switch.
 #define PAUSE_SWITCH_PIN 14

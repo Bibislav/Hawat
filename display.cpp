@@ -4,12 +4,6 @@
 
 LiquidCrystal lcd(LCD_RS_PIN, LCD_EN_PIN, LCD_D4_PIN, LCD_D5_PIN, LCD_D6_PIN, LCD_D7_PIN);
 
-enum PossibleAlign {
-    CENTER,
-    LEFT,
-    RIGNT
-};
-
 // ==== Basic functionality ====
 void initDisplay() {
     lcd.begin(LCD_COLUMNS, LCD_ROWS);
@@ -18,13 +12,6 @@ void initDisplay() {
 
 void clearDisplay() {
     lcd.clear();
-}
-
-void clearRow(int row) {
-    for (int i = 0; i < LCD_COLUMNS; i++) {
-        setCursorAtTheSpecificPosition(i, row);
-        lcd.write(' ');
-    }
 }
 
 void setCursorAtOrigin() {
@@ -37,7 +24,7 @@ bool checkBoundary(int x, int y) {
 
 void setCursorAtTheSpecificPosition(int x, int y) {
     if (!checkBoundary(x,y)) {
-        // TODO: Dodat neki debug!
+        // TODO: Add some kind  of debug or log!
         return;
     } 
     lcd.setCursor(x, y);
@@ -65,60 +52,99 @@ void fillColumnWith(char c, int column) {
     }
 }
 
+void clearRow(int row) {
+    fillRowWith(' ', row);
+}
+
+void clearColumn(int column) {
+    fillColumnWith(' ', column);
+}
+
+void printLineToRow(String s, int row) {
+    setCursorAtTheBeginningOfARow(row);
+    lcd.print(s);
+}
+
 // ==== Specific scenarions ====
 void createBorder() {
     createBorder('X');
 }
-void createBorder(char c) {
-    fillRowWith(c, 0);
-    fillRowWith(c, LCD_ROWS-1);
-    fillColumnWith(c, 0);
-    fillColumnWith(c, LCD_COLUMNS-1);
+void createBorder(char decorationPattern) {
+    fillRowWith(decorationPattern, 0);
+    fillRowWith(decorationPattern, LCD_ROWS-1);
+    fillColumnWith(decorationPattern, 0);
+    fillColumnWith(decorationPattern, LCD_COLUMNS-1);
 }
 
-void printString(String s, int row, PossibleAlign selectedAlign) {
-    int lenOfString = s.length(); 
-    if (lenOfString > LCD_COLUMNS) {
-        // TODO: Dodat neki debug!
-        return;
-    }
-    int position = 0;
-    switch (selectedAlign)
-    {
-    case CENTER:
-        int middleOfLcd = 0;
-        int halfOfWord = 0;
-        halfOfWord = (lenOfString / 2);
-        middleOfLcd = (LCD_COLUMNS / 2) - 1;
-        position = middleOfLcd - halfOfWord;
-        setCursorAtTheSpecificPosition(position, row);
-        lcd.print(s);  
-        break;
+// ==== Screen ====
 
-    case LEFT:
-        setCursorAtTheBeginningOfARow(row);
-        lcd.print(s);
-        break;
-
-    case RIGNT:
-        position = LCD_COLUMNS - lenOfString - 1; 
-        setCursorAtTheSpecificPosition(position, row);
-        lcd.print(s);
-        break;
-    
-    default:
-        // TODO: Dodat neki debug!
-        break;
-    }
-}
-
-void initialScreen() {
-    initialScreen(2.5);
-}
-void initialScreen(float sleepSeconds) {
+void welcomeScreen() {
+    welcomeScreen(2.5);
+} 
+void welcomeScreen(float sleepSeconds) {
     clearDisplay();
     createBorder();
-    printString("-Hawat-", 2, CENTER);
-    printString(VERSION, 3, CENTER);
-    // delay(sleepSeconds * 1000); TODO: Make this with dolayless delay
+    printAlignedText("-Hawat-", 2, CENTER);
+    printAlignedText(VERSION, 3, CENTER);
+    // TODO: Make this with delayless delay
+    delay(sleepSeconds * 1000);
+}
+
+void printAlignedText(const String &s, int row, PossibleAlign selectedAlign) {
+    int lenOfString = s.length(); 
+    int position = 0;
+
+    if (lenOfString > LCD_COLUMNS) {
+        // TODO: Add some kind  of debug or log!
+        return;
+    }
+    
+    switch (selectedAlign) {
+        case CENTER:
+            position = (LCD_COLUMNS / 2) - (lenOfString / 2) - 1;  
+            break;
+
+        case LEFT:
+            position = 0;
+            break;
+
+        case RIGHT:
+            position = LCD_COLUMNS - lenOfString - 1; 
+            break;
+    
+        default:
+            // TODO: Add some kind  of debug or log!
+            break;
+    }
+    setCursorAtTheSpecificPosition(position, row);
+    lcd.print(s);
+}
+
+void addTitle(Title title, DecorationPattern decorationPattern) {
+    printLineToRow(generateDecorationPattern(decorationPattern), 0);
+    printAlignedText(titleToString(title), 0, CENTER);
+}
+
+String generateDecorationPattern(DecorationPattern d) {
+    switch (d) {
+        case ARROW:
+            String decorationPatternString;
+            for (int i = 0; i < LCD_COLUMNS/2; i++) decorationPatternString += ">";
+            for (int i = 0; i < LCD_COLUMNS/2; i++) decorationPatternString += "<";
+            return decorationPatternString;
+            
+        default: 
+            // TODO: Add some kind  of debug or log!
+            return "er30";
+    }
+}
+
+String titleToString(Title t) {
+    switch (t) {
+        case BYPASS_MODE:    return "BYPASS MODE";
+        case CONTINIUS_MODE: return "CONTINIUS MODE";
+        case MAIN_MENU:      return "MAIN MENU";
+        // TODO: Add some kind  of debug or log!
+        default:             return "er45";
+    }
 }

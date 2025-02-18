@@ -28,10 +28,16 @@
 
 void setup() {
   initDisplay();
-  delay(2500);
+  welcomeScreen();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
+  // Just for testing...
+  addTitle(MAIN_MENU, ARROW);
+  delay(2500);
+  addTitle(BYPASS_MODE, ARROW);
+  delay(2500);
+  addTitle(CONTINIUS_MODE, ARROW);
+  delay(2500);
+  // -------------------------------
 }

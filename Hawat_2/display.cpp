@@ -1,4 +1,5 @@
 #include "display.h"
+#include "screen.h"
 #include "config.h"
 #include <LiquidCrystal.h>
 
@@ -8,6 +9,7 @@ LiquidCrystal lcd(LCD_RS_PIN, LCD_EN_PIN, LCD_D4_PIN, LCD_D5_PIN, LCD_D6_PIN, LC
 void initDisplay() {
     lcd.begin(LCD_COLUMNS, LCD_ROWS);
     lcd.clear();
+    welcomeScreen();
 }
 
 void clearDisplay() {
@@ -66,28 +68,14 @@ void printLineToRow(String s, int row) {
 }
 
 // ==== Specific scenarions ====
-void createBorder() {
-    createBorder('X');
-}
 void createBorder(char decorationPattern) {
     fillRowWith(decorationPattern, 0);
     fillRowWith(decorationPattern, LCD_ROWS-1);
     fillColumnWith(decorationPattern, 0);
     fillColumnWith(decorationPattern, LCD_COLUMNS-1);
 }
-
-// ==== Screen ====
-
-void welcomeScreen() {
-    welcomeScreen(2.5);
-} 
-void welcomeScreen(float sleepSeconds) {
-    clearDisplay();
-    createBorder();
-    printAlignedText("-Hawat-", 2, CENTER);
-    printAlignedText(VERSION, 3, CENTER);
-    // TODO: Make this with delayless delay
-    delay(sleepSeconds * 1000);
+void createBorder() {
+    createBorder('X');
 }
 
 void printAlignedText(const String &s, int row, PossibleAlign selectedAlign) {
@@ -125,18 +113,23 @@ void addTitle(Title title, DecorationPattern decorationPattern) {
     printAlignedText(titleToString(title), 0, CENTER);
 }
 
+// ==== Generate shiit ====
 String generateDecorationPattern(DecorationPattern d) {
+    String decorationPatternString;
     switch (d) {
         case ARROW:
-            String decorationPatternString;
             for (int i = 0; i < LCD_COLUMNS/2; i++) decorationPatternString += ">";
             for (int i = 0; i < LCD_COLUMNS/2; i++) decorationPatternString += "<";
-            return decorationPatternString;
+            break;
+        case STAR:
+            for (int i = 0; i < LCD_COLUMNS; i++) decorationPatternString += "*";
+            break;
             
         default: 
             // TODO: Add some kind  of debug or log!
-            return "er30";
+            decorationPatternString = "er30";
     }
+    return decorationPatternString;
 }
 
 String titleToString(Title t) {

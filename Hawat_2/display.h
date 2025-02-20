@@ -2,7 +2,6 @@
 #define DISPLAY_H
 
 #include <Arduino.h>
-#include "config.h"
 
 enum PossibleAlign {
     CENTER,
@@ -11,7 +10,8 @@ enum PossibleAlign {
 };
 
 enum DecorationPattern {
-    ARROW // >>>>> ... <<<<<
+    ARROW, // >>>>> ... <<<<<
+    STAR // ***** ... *****
 };
 
 enum Title {
@@ -34,8 +34,6 @@ void clearColumn(int column);
 void printLineToRow(String s, int row);
 void createBorder();
 void createBorder(char decorationPattern);
-void welcomeScreen();
-void welcomeScreen(float sleepSeconds);
 void printAlignedText(const String &s, int row, PossibleAlign selectedAlign);
 void addTitle(Title title, DecorationPattern decorationPattern);
 String generateDecorationPattern(DecorationPattern d);

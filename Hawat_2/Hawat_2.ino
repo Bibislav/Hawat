@@ -23,21 +23,23 @@
 // ******************************************************************************************************************
 // Trenutno je cijeli GUI podrazumjeva da se koristi 20x4 display...Nisam siguran kako bi se ponasao da stavimo manje/veci (nije update vise exploratory)
 
-#include "config.h"
+// #include "config.h" // Maybe not needed...
 #include "display.h"
+#include "screen.h"
 
 void setup() {
   initDisplay();
-  welcomeScreen();
 }
 
 void loop() {
   // Just for testing...
-  addTitle(MAIN_MENU, ARROW);
-  delay(2500);
-  addTitle(BYPASS_MODE, ARROW);
-  delay(2500);
-  addTitle(CONTINIUS_MODE, ARROW);
-  delay(2500);
+  // addTitle(MAIN_MENU, ARROW);
+  // delay(2500);
+  // addTitle(BYPASS_MODE, ARROW);
+  // delay(2500);
+  // addTitle(CONTINIUS_MODE, ARROW);
+  // delay(2500);
   // -------------------------------
+  
+
 }

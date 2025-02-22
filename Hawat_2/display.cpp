@@ -72,7 +72,9 @@ void createBorder(char decorationPattern) {
     fillRowWith(decorationPattern, 0);
     fillRowWith(decorationPattern, LCD_ROWS-1);
     fillColumnWith(decorationPattern, 0);
+    fillColumnWith(decorationPattern, 1);
     fillColumnWith(decorationPattern, LCD_COLUMNS-1);
+    fillColumnWith(decorationPattern, LCD_COLUMNS-2);
 }
 void createBorder() {
     createBorder('X');

@@ -115,6 +115,11 @@ void addTitle(Title title, DecorationPattern decorationPattern) {
     printAlignedText(titleToString(title), 0, CENTER);
 }
 
+void addStatusMessage(Status status, DecorationPattern decorationPattern) {
+    printLineToRow(generateDecorationPattern(decorationPattern), 2);
+    printAlignedText(statusToString(status), 2, CENTER);
+}
+
 // ==== Generate shiit ====
 String generateDecorationPattern(DecorationPattern d) {
     String decorationPatternString;
@@ -126,10 +131,14 @@ String generateDecorationPattern(DecorationPattern d) {
         case STAR:
             for (int i = 0; i < LCD_COLUMNS; i++) decorationPatternString += "*";
             break;
+
+        case LINE:
+            for (int i = 0; i < LCD_COLUMNS; i++) decorationPatternString += "-";
+            break;
             
         default: 
             // TODO: Add some kind  of debug or log!
-            decorationPatternString = "er30";
+            decorationPatternString = "er137";
     }
     return decorationPatternString;
 }
@@ -140,6 +149,15 @@ String titleToString(Title t) {
         case CONTINIUS_MODE: return "CONTINIUS MODE";
         case MAIN_MENU:      return "MAIN MENU";
         // TODO: Add some kind  of debug or log!
-        default:             return "er45";
+        default:             return "er142";
+    }
+}
+
+String statusToString(Status s) {
+    switch (s) {
+        case ENGRAVING: return "ENGRAVING!";
+        case PAUSE:     return "PAUSE!";
+        // TODO: Add some kind  of debug or log!
+        default:        return "er152";
     }
 }

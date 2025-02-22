@@ -5,8 +5,8 @@
 void welcomeScreen(float sleepSeconds) {
     clearDisplay();
     createBorder();
-    printAlignedText("-Hawat-", 2, CENTER);
-    printAlignedText(VERSION, 3, CENTER);
+    printAlignedText("-Hawat-", 1, CENTER);
+    printAlignedText(VERSION, 2, CENTER);
     // TODO: Make this with delayless delay
     delay(sleepSeconds * 1000);
 }

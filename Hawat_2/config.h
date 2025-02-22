@@ -17,6 +17,8 @@
 // Pins that goes to stepper controler. Check your controler for DIR and PULL input.
 #define STEPPER_PULL_PIN 3
 #define STEPPER_DIRECTION_PIN 2
+// Number of steps for full circle
+#define STEPS_FOR_CIRCLE 400
 
 // Output from Hawat that stats engraving. Conects to engraving machine itself.
 #define START_ENGRAVING_PIN 15

@@ -26,10 +26,12 @@
 // #include "config.h" // Maybe not needed...
 #include "display.h"
 #include "screen.h"
+#include "stepper.h"
 
 void setup() {
   initDisplay();
   bypassMode();
+  moveStepper();  
 }
 
 void loop() {

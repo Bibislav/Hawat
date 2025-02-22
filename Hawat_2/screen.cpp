@@ -25,11 +25,12 @@ void bypassMode() {
     addTitle(BYPASS_MODE, ARROW);
 
     // Just for testing---------------------
-    for (int i = 0; i < 10; i++)
+    while(true)
     {
         addStatusMessage(ENGRAVING, LINE);
         delay(1500);
         addStatusMessage(PAUSE, LINE);
+        delay(1500);
     }
     // -------------------------------------
 }

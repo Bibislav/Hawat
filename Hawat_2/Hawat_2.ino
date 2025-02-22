@@ -29,6 +29,7 @@
 
 void setup() {
   initDisplay();
+  bypassMode();
 }
 
 void loop() {

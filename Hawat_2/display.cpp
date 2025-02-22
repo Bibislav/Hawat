@@ -91,7 +91,7 @@ void printAlignedText(const String &s, int row, PossibleAlign selectedAlign) {
     
     switch (selectedAlign) {
         case CENTER:
-            position = (LCD_COLUMNS / 2) - (lenOfString / 2) - 1;  
+            position = (LCD_COLUMNS / 2) - (lenOfString / 2);  
             break;
 
         case LEFT:

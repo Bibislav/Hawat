@@ -6,9 +6,8 @@
 // Impr_: Uljepsat Main menu (low prio)
 // Impr_: Dodati odbrojavanje do kraja graviranja i okretanja. (mid prio)
 // Impr_: Dodati scroll bar (mid prio)
-// Impr_: Promjenit nacin vracanja u main meni. S tipkom na rotary encoderu (mid prio) 
+// Impr_: Promjenit nacin vracanja u main meni. S tipkom na rotary encoderu (mid prio)
 // Impr__1: Kada se vraca u main menu iz continus/bypass modea pitati da li da obrise part ili da ga sacuva (is blocker for Impr_6)
-
 
 // Updates:
 // ******************************************************************************************************************
@@ -19,7 +18,7 @@
 //   4.3 Dodati na ekran broj izgraviranih komad i mogucnost da se upise rucno broj komada
 //   4.4 Dodati tipku na ekranu STAT na koju kad bi pritisnuo, otvorio bi se meni sa svom statistikkom
 //       npr. vrijeme graviranja = prosjecno vrijeme +- pogreska, najbrze graviranje, najsporije, broj komada
-//   4.5 Dodati mogucnost set_time() unutar continius modea 
+//   4.5 Dodati mogucnost set_time() unutar continius modea
 // ******************************************************************************************************************
 // Trenutno je cijeli GUI podrazumjeva da se koristi 20x4 display...Nisam siguran kako bi se ponasao da stavimo manje/veci (nije update vise exploratory)
 
@@ -28,21 +27,21 @@
 #include "screen.h"
 #include "stepper.h"
 
-void setup() {
+void setup()
+{
   initDisplay();
-  bypassMode();
-  moveStepper();  
 }
 
-void loop() {
-  // Just for testing...
-  // addTitle(MAIN_MENU, ARROW);
-  // delay(2500);
-  // addTitle(BYPASS_MODE, ARROW);
-  // delay(2500);
-  // addTitle(CONTINIUS_MODE, ARROW);
-  // delay(2500);
-  // -------------------------------
-  
-
+void loop()
+{
+  for (int i = 0; i < 3; i++)
+  {
+    mainMenuScreen(i);
+    delay(2500);
+  }
+  for (int i = 1; i >= 0; i--)
+  {
+    mainMenuScreen(i);
+    delay(2500);
+  }
 }

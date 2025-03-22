@@ -5,11 +5,47 @@
 
 LiquidCrystal lcd(LCD_RS_PIN, LCD_EN_PIN, LCD_D4_PIN, LCD_D5_PIN, LCD_D6_PIN, LCD_D7_PIN);
 
+uint8_t down[] = {
+        0b00000,
+        0b00100,
+        0b00100,
+        0b00100,
+        0b10101,
+        0b01110,
+        0b00100,
+        0b00000
+    };
+uint8_t dot[] = {
+        0b00000,
+        0b00100,
+        0b01110,
+        0b11111,
+        0b01110,
+        0b00100,
+        0b00000,
+        0b00000
+    };    
+
 // ==== Basic functionality ====
 void initDisplay() {
     lcd.begin(LCD_COLUMNS, LCD_ROWS);
-    lcd.clear();
+    createChars();
+    clearDisplay();
     welcomeScreen();
+}
+
+void createChars() {
+    lcd.createChar(0, dot);
+    lcd.createChar(1, down);
+}
+
+void printDotAtPosition(int x, int y) {
+    setCursorAtTheSpecificPosition(x, y);
+    lcd.write(byte(0));
+}
+
+void printDotAtTheBeginningOfARow(int y) {
+    printDotAtPosition(0, y);
 }
 
 void clearDisplay() {
@@ -81,6 +117,9 @@ void createBorder() {
 }
 
 void printAlignedText(const String &s, int row, PossibleAlign selectedAlign) {
+    printAlignedText(s, row, selectedAlign, 0);
+}
+void printAlignedText(const String &s, int row, PossibleAlign selectedAlign, int offset) {
     int lenOfString = s.length(); 
     int position = 0;
 
@@ -91,15 +130,23 @@ void printAlignedText(const String &s, int row, PossibleAlign selectedAlign) {
     
     switch (selectedAlign) {
         case CENTER:
-            position = (LCD_COLUMNS / 2) - (lenOfString / 2);  
+            position = (LCD_COLUMNS / 2) - (lenOfString / 2) + offset;  
             break;
 
         case LEFT:
-            position = 0;
+            if (offset < 0) {
+                // TODO: Add some kind  of debug or log!
+                break;
+            }
+            position = 0 + offset;
             break;
 
         case RIGHT:
-            position = LCD_COLUMNS - lenOfString - 1; 
+            if (offset > 0) {
+                // TODO: Add some kind  of debug or log!
+                break;
+            }  
+            position = LCD_COLUMNS - lenOfString - 1 + offset; 
             break;
     
         default:

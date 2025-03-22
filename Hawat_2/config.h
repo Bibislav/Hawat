@@ -10,8 +10,8 @@
 #define FOOT_SWITCH_PIN 16
 
 // Nub for interacting with Hawat. Check rotary encoder pinout. Usuly out_A or something like that.
-#define ROTARY_ENCODER_PIN_A 5
-#define ROTARY_ENCODER_PIN_B 6
+#define ROTARY_ENCODER_PIN_A 6
+#define ROTARY_ENCODER_PIN_B 5
 #define ROTARY_ENCODER_BUTTON_PIN 4
 
 // Pins that goes to stepper controler. Check your controler for DIR and PULL input.

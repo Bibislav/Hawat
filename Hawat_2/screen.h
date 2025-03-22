@@ -3,7 +3,7 @@
 
 void welcomeScreen();
 void welcomeScreen(float sleepSeconds);
-void mainMenuScreen();
-void bypassMode();
+void mainMenuScreen(int position);
+void bypassModeScreen();
 
 #endif

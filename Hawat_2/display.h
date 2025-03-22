@@ -28,6 +28,9 @@ enum Status {
 
 void initDisplay();
 void clearDisplay();
+void createChars();
+void printDotAtPosition(int x, int y);
+void printDotAtTheBeginningOfARow(int y);
 void setCursorAtOrigin();
 bool checkBoundary(int x, int y);
 void setCursorAtTheSpecificPosition(int x, int y);
@@ -40,6 +43,7 @@ void clearColumn(int column);
 void printLineToRow(String s, int row);
 void createBorder();
 void createBorder(char decorationPattern);
+void printAlignedText(const String &s, int row, PossibleAlign selectedAlign, int offset);
 void printAlignedText(const String &s, int row, PossibleAlign selectedAlign);
 void addTitle(Title title, DecorationPattern decorationPattern);
 void addStatusMessage(Status status, DecorationPattern decorationPattern);

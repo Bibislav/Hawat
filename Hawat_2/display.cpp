@@ -204,18 +204,18 @@ String generateDecorationPattern(DecorationPattern d) {
             
         default: 
             // TODO: Add some kind  of debug or log!
-            decorationPatternString = "er137";
+            decorationPatternString = "er207";
     }
     return decorationPatternString;
 }
 
 String titleToString(Title t) {
     switch (t) {
-        case BYPASS_MODE:    return "BYPASS MODE";
-        case CONTINIUS_MODE: return "CONTINIUS MODE";
-        case MAIN_MENU:      return "MAIN MENU";
+        case BYPASS_MODE:    return " Bypass Mode ";
+        case CONTINIUS_MODE: return " Continius Mode ";
+        case MAIN_MENU:      return " Main Menu ";
         // TODO: Add some kind  of debug or log!
-        default:             return "er142";
+        default:             return "er218";
     }
 }
 
@@ -224,6 +224,6 @@ String statusToString(Status s) {
         case ENGRAVING: return "ENGRAVING!";
         case PAUSE:     return "PAUSE!";
         // TODO: Add some kind  of debug or log!
-        default:        return "er152";
+        default:        return "er227";
     }
 }

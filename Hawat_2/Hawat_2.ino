@@ -28,6 +28,7 @@
 #include "screen.h"
 #include "stepper.h"
 #include "rotaryEncoder.h"
+#include "mode.h"
 
 void setup()
 {
@@ -37,12 +38,11 @@ void setup()
   mainMenuScreen(0);
 
   initRotaryEncoder();
-  
-  // Just for testing
-  unsigned short int position = selectLoop();
-  selectModeScreen(position);
+  initSwitch();
 }
 
 void loop()
 {
+  unsigned short int position = selectLoop();
+  selectMode(position);
 }

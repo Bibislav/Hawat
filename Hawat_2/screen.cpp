@@ -18,7 +18,7 @@ void welcomeScreen()
     welcomeScreen(2.5);
 }
 
-void mainMenuScreen(int position)
+void mainMenuScreen(unsigned short int position)
 {
     clearDisplay();
     addTitle(MAIN_MENU, ARROW);
@@ -29,51 +29,33 @@ void mainMenuScreen(int position)
         printRightArrowAtTheBeginningOfARow(2);
         printAlignedText("Continious Mode", 2, LEFT, 1);
         printAlignedText("Bypass Mode", 3, LEFT, 1);
+        printDownArrowAtTheEndOfARow(3);
         break;
     case 1:
         printRightArrowAtTheBeginningOfARow(3);
         printAlignedText("Continious Mode", 2, LEFT, 1);
         printAlignedText("Bypass Mode", 3, LEFT, 1);
+        printDownArrowAtTheEndOfARow(3);
         break;
     case 2:
         printRightArrowAtTheBeginningOfARow(3);
         printAlignedText("Bypass Mode", 2, LEFT, 1);
         printAlignedText("Fine adjust", 3, LEFT, 1);
+        printUpArrowAtTheEndOfARow(2);
         break;    
     default:
         break;
     }
 }
 
-void bypassModeScreen()
-{
+void bypassModeScreen() {
     clearDisplay();
     addTitle(BYPASS_MODE, ARROW);
-
-    // Just for testing---------------------
-    // for (int i = 0; i < 10; i++)
-    // {
-    //     addStatusMessage(ENGRAVING, LINE);
-    //     delay(1000);
-    //     addStatusMessage(PAUSE, LINE);
-    //     delay(1000);
-    // }
-    // -------------------------------------
 }
 
-void selectModeScreen(unsigned short int position) {
-    switch (position)
-    {
-    case 0:
-        // Continious Mode
-        break;
-    case 1:
-        bypassModeScreen();
-        break;
-    case 2:
-        // Fine adjust
-        break;
-    default:
-        break;
-    }
-}
+// void bypassModeScreen(Status status)
+// {
+//     clearDisplay();
+//     addTitle(BYPASS_MODE, ARROW);
+//     addStatusMessage(status, LINE);
+// }

@@ -6,20 +6,30 @@ LiquidCrystal lcd(LCD_RS_PIN, LCD_EN_PIN, LCD_D4_PIN, LCD_D5_PIN, LCD_D6_PIN, LC
 
 uint8_t downArrow[] = {
         0b00000,
-        0b00100,
+        0b00000,
+        0b00000,
         0b00100,
         0b00100,
         0b10101,
         0b01110,
+        0b00100
+    };
+uint8_t upArrow[] = {
         0b00100,
-        0b00000
+        0b01110,
+        0b10101,
+        0b00100,
+        0b00100,
+        0b00000,
+        0b00000,
+        0b00000,
     };
 uint8_t rightArrow[] = {
         0b00000,
         0b00100,
-        0b00110,
+        0b00010,
         0b11111,
-        0b00110,
+        0b00010,
         0b00100,
         0b00000,
         0b00000
@@ -46,6 +56,25 @@ void createChars() {
     lcd.createChar(0, dot);
     lcd.createChar(1, downArrow);
     lcd.createChar(2, rightArrow);
+    lcd.createChar(3, upArrow);
+}
+
+void printUpArrowAtPosition(int x, int y) {
+    setCursorAtTheSpecificPosition(x, y);
+    lcd.write(byte(3));
+}
+
+void printUpArrowAtTheEndOfARow(int y) {
+    printUpArrowAtPosition(LCD_COLUMNS-1, y);
+}
+
+void printDownArrowAtPosition(int x, int y) {
+    setCursorAtTheSpecificPosition(x, y);
+    lcd.write(byte(1));
+}
+
+void printDownArrowAtTheEndOfARow(int y) {
+    printDownArrowAtPosition(LCD_COLUMNS-1, y);
 }
 
 void printRightArrowAtPosition(int x, int y) {

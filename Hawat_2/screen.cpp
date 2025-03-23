@@ -27,18 +27,15 @@ void mainMenuScreen(int position)
     {
     case 0:
         printRightArrowAtTheBeginningOfARow(2);
-        printDotAtTheBeginningOfARow(3);
         printAlignedText("Continious Mode", 2, LEFT, 1);
         printAlignedText("Bypass Mode", 3, LEFT, 1);
         break;
     case 1:
-        printDotAtTheBeginningOfARow(2);
         printRightArrowAtTheBeginningOfARow(3);
         printAlignedText("Continious Mode", 2, LEFT, 1);
         printAlignedText("Bypass Mode", 3, LEFT, 1);
         break;
     case 2:
-        printDotAtTheBeginningOfARow(2);
         printRightArrowAtTheBeginningOfARow(3);
         printAlignedText("Bypass Mode", 2, LEFT, 1);
         printAlignedText("Fine adjust", 3, LEFT, 1);
@@ -62,4 +59,21 @@ void bypassModeScreen()
     //     delay(1000);
     // }
     // -------------------------------------
+}
+
+void selectModeScreen(unsigned short int position) {
+    switch (position)
+    {
+    case 0:
+        // Continious Mode
+        break;
+    case 1:
+        bypassModeScreen();
+        break;
+    case 2:
+        // Fine adjust
+        break;
+    default:
+        break;
+    }
 }

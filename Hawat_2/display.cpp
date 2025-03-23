@@ -1,5 +1,4 @@
 #include "display.h"
-#include "screen.h"
 #include "config.h"
 #include <LiquidCrystal.h>
 
@@ -41,7 +40,6 @@ void initDisplay() {
     lcd.begin(LCD_COLUMNS, LCD_ROWS);
     createChars();
     clearDisplay();
-    welcomeScreen();
 }
 
 void createChars() {

@@ -5,7 +5,8 @@
 // Impr_: Promjeni imena funkcija i varijabli...they are horrible (low prio)
 // Impr_: Uljepsat Main menu (low prio)
 // Impr_: Dodati odbrojavanje do kraja graviranja i okretanja. (mid prio)
-// Impr_: Dodati scroll bar (mid prio)
+// Impr_: Dodati scroll bar (low prio) - Jos treba razmisliti kako bi to izgledalo. Back to (low prio)
+// Impr_x: Spojit rotary encoder na interrupt arduino pin (mid prio)
 // Impr_: Promjenit nacin vracanja u main meni. S tipkom na rotary encoderu (mid prio)
 // Impr__1: Kada se vraca u main menu iz continus/bypass modea pitati da li da obrise part ili da ga sacuva (is blocker for Impr_6)
 
@@ -30,17 +31,18 @@
 
 void setup()
 {
+
   initDisplay();
+  welcomeScreen();
+  mainMenuScreen(0);
+
+  initRotaryEncoder();
+  
+  // Just for testing
+  unsigned short int position = selectLoop();
+  selectModeScreen(position);
 }
 
 void loop()
 {
-  mainMenuScreen(0);
-  delay(1000);
-  mainMenuScreen(1);
-  delay(1000);
-  mainMenuScreen(2);
-  delay(1000);
-  mainMenuScreen(1);
-  delay(1000);
 }

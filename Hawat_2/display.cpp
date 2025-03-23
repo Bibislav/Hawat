@@ -5,7 +5,7 @@
 
 LiquidCrystal lcd(LCD_RS_PIN, LCD_EN_PIN, LCD_D4_PIN, LCD_D5_PIN, LCD_D6_PIN, LCD_D7_PIN);
 
-uint8_t down[] = {
+uint8_t downArrow[] = {
         0b00000,
         0b00100,
         0b00100,
@@ -15,6 +15,16 @@ uint8_t down[] = {
         0b00100,
         0b00000
     };
+uint8_t rightArrow[] = {
+        0b00000,
+        0b00100,
+        0b00110,
+        0b11111,
+        0b00110,
+        0b00100,
+        0b00000,
+        0b00000
+    };    
 uint8_t dot[] = {
         0b00000,
         0b00100,
@@ -36,7 +46,17 @@ void initDisplay() {
 
 void createChars() {
     lcd.createChar(0, dot);
-    lcd.createChar(1, down);
+    lcd.createChar(1, downArrow);
+    lcd.createChar(2, rightArrow);
+}
+
+void printRightArrowAtPosition(int x, int y) {
+    setCursorAtTheSpecificPosition(x, y);
+    lcd.write(byte(2));
+}
+
+void printRightArrowAtTheBeginningOfARow(int y) {
+    printRightArrowAtPosition(0, y);
 }
 
 void printDotAtPosition(int x, int y) {
@@ -123,8 +143,9 @@ void printAlignedText(const String &s, int row, PossibleAlign selectedAlign, int
     int lenOfString = s.length(); 
     int position = 0;
 
-    if (lenOfString > LCD_COLUMNS) {
+    if ((lenOfString > LCD_COLUMNS) && (lenOfString + abs(offset) > LCD_COLUMNS)) {
         // TODO: Add some kind  of debug or log!
+        printDotAtPosition(19,3);
         return;
     }
     
@@ -134,25 +155,23 @@ void printAlignedText(const String &s, int row, PossibleAlign selectedAlign, int
             break;
 
         case LEFT:
-            if (offset < 0) {
-                // TODO: Add some kind  of debug or log!
-                break;
-            }
-            position = 0 + offset;
+            position = 0 + abs(offset);
             break;
 
-        case RIGHT:
-            if (offset > 0) {
-                // TODO: Add some kind  of debug or log!
-                break;
-            }  
-            position = LCD_COLUMNS - lenOfString - 1 + offset; 
+        case RIGHT:  
+            position = LCD_COLUMNS - lenOfString -  abs(offset); 
             break;
     
         default:
             // TODO: Add some kind  of debug or log!
             break;
     }
+    if ((position < 0) || (position + lenOfString > LCD_COLUMNS)) {
+        // TODO: Add some kind  of debug or log!
+        clearDisplay();
+        printDotAtPosition(0,0);
+        return;
+        }
     setCursorAtTheSpecificPosition(position, row);
     lcd.print(s);
 }

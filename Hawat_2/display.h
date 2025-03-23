@@ -29,6 +29,8 @@ enum Status {
 void initDisplay();
 void clearDisplay();
 void createChars();
+void printRightArrowAtPosition(int x, int y);
+void printRightArrowAtTheBeginningOfARow(int y);
 void printDotAtPosition(int x, int y);
 void printDotAtTheBeginningOfARow(int y);
 void setCursorAtOrigin();

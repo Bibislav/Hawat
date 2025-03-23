@@ -26,6 +26,7 @@
 #include "display.h"
 #include "screen.h"
 #include "stepper.h"
+#include "rotaryEncoder.h"
 
 void setup()
 {
@@ -34,14 +35,12 @@ void setup()
 
 void loop()
 {
-  for (int i = 0; i < 3; i++)
-  {
-    mainMenuScreen(i);
-    delay(2500);
-  }
-  for (int i = 1; i >= 0; i--)
-  {
-    mainMenuScreen(i);
-    delay(2500);
-  }
+  mainMenuScreen(0);
+  delay(1000);
+  mainMenuScreen(1);
+  delay(1000);
+  mainMenuScreen(2);
+  delay(1000);
+  mainMenuScreen(1);
+  delay(1000);
 }
